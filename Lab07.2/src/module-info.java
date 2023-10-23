@@ -9,5 +9,6 @@
 module com.entertainment {
     // which of my packages are "exposed" to other Java module?
     exports com.entertainment;
+    exports com.entertainment.util;
 
 }
