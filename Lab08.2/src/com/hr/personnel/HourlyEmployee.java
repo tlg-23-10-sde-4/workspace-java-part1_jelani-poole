@@ -9,6 +9,7 @@ public class HourlyEmployee extends Employee {
 
     // constructors
     public HourlyEmployee() {
+        super();
     }
 
     public HourlyEmployee(String name, LocalDate hireDate) {
