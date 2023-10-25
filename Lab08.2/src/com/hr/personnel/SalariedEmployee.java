@@ -28,6 +28,10 @@ public class SalariedEmployee extends Employee {
         System.out.println(getName() + " is paid salary " + payment);
     }
 
+    public void takeVacation() {
+        System.out.println(getName() + " is on vacation");
+    }
+
     //accessor methods
     public double getSalary() {
         return salary;
