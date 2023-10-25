@@ -5,6 +5,7 @@ import gov.irs.TaxPayer;
 import java.time.LocalDate;
 
 public class SalariedEmployee extends Employee {
+    public static final double STANDARD_DEDUCTION = 7500.0;
     // fields
     private double salary = 2500.0;
 
@@ -22,6 +23,11 @@ public class SalariedEmployee extends Employee {
     public SalariedEmployee(String name, LocalDate hireDate, double salary) {
         this(name, hireDate);
         setSalary(salary);
+    }
+
+    @Override
+    public double getStandardDeduction() {
+        return STANDARD_DEDUCTION;
     }
 
     @Override
@@ -47,6 +53,7 @@ public class SalariedEmployee extends Employee {
     public void setSalary(double salary) {
         this.salary = salary;
     }
+
 
 //    @Override
 //    public String toString() {

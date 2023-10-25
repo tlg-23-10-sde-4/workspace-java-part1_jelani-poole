@@ -5,6 +5,7 @@ import gov.irs.TaxPayer;
 import java.time.LocalDate;
 
 public class HourlyEmployee extends Employee {
+    public static final double STANDARD_DEDUCTION = 7500.0;
     // fields
     private double rate;
     private double hours;
@@ -22,6 +23,11 @@ public class HourlyEmployee extends Employee {
         this(name, hireDate);
         setRate(rate);
         setHours(hours);
+    }
+
+    @Override
+    public double getStandardDeduction() {
+        return STANDARD_DEDUCTION;
     }
 
     @Override
