@@ -1,4 +1,4 @@
-package com.entertainment;
+package src.com.entertainment;
 
 import java.util.Arrays;
 
@@ -32,17 +32,19 @@ public class Television {
         instanceCount++;
     }
 
-    public Television(String brand) {
+    public Television(String brand) throws InvalidBrandException {
         this();                     // delegate to no-arg ctor for the increment
         setBrand(brand);            // delegate to setter for any validation
     }
 
-    public Television(String brand, int volume) {
+    public Television(String brand, int volume)
+            throws IllegalArgumentException, InvalidBrandException {
         this(brand);
         setVolume(volume);
     }
 
-    public Television(String brand, int volume, DisplayType display) {
+    public Television(String brand, int volume, DisplayType display)
+            throws IllegalArgumentException, InvalidBrandException {
         this(brand,volume);
         setDisplay(display);
 
@@ -63,15 +65,16 @@ public class Television {
         return brand;
     }
         // TODO: Lab 6.1 pg 81 (optional)
-    public void setBrand(String brand) {
+    public void setBrand(String brand) throws InvalidBrandException {
         boolean valid = false;
 
         if (isValidBrand(brand)) {
             this.brand = brand;
         }
         else {
-            System.out.printf("Invalid brand: %s. Must be one of %s.\n",
-                    brand, Arrays.toString(VALID_BRANDS));
+            throw new InvalidBrandException(
+                    String.format("Invalid brand: %s. Must be one of %s.\n",
+                    brand, Arrays.toString(VALID_BRANDS)));
         }
     }
 
@@ -91,13 +94,14 @@ public class Television {
         return volume;
     }
 
-    public void setVolume(int volume) {
-        this.volume = volume;
+    public void setVolume(int volume) throws IllegalArgumentException {
         if (volume >= MIN_VOLUME && volume <= MAX_VOLUME) {
+            this.volume = volume;
             System.out.println("Volume set to " + volume);
         } else {
-            System.out.printf("Invalid volume: %s. Must be between %s and %s.\n",
-                    volume, MIN_VOLUME, MAX_VOLUME);
+            throw new IllegalArgumentException(
+                    String.format("Invalid volume: %s. Must be between %s and %s.\n",
+                    volume, MIN_VOLUME, MAX_VOLUME));
 
  //           System.out.println("Invalid volume: volume must be between " + MIN_VOLUME + " and " + MAX_VOLUME);
         }

@@ -1,6 +1,8 @@
-package com.entertainment.client;
+package src.com.entertainment.client;
 
 import com.entertainment.Television;
+import src.com.entertainment.InvalidBrandException;
+
 import static com.entertainment.DisplayType.*;
 
 /*
@@ -10,18 +12,20 @@ import static com.entertainment.DisplayType.*;
 class TelevisionClient {
 
     // application starting point - at runtime, the app starts here
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InvalidBrandException {
         System.out.println(Television.getInstanceCount() + " instances have been created");
         System.out.println();
 
         // create an instance of Television and set its properties
         Television tv1 = new Television();
-        tv1.setBrand("Samsung");
+        tv1.setBrand("Kyle's Mega TV");
         tv1.setVolume(32);
         tv1.setDisplay(PLASMA);
 
+
         // create a 2nd instance of Television and set its properties
         Television tv2 = new Television("Sony", Television.MAX_VOLUME,OLED);
+        System.out.println();
 
         // create a 3rd instance
         Television tv3 = new Television("LG");
@@ -40,6 +44,7 @@ class TelevisionClient {
 
         tv4.turnOn();
         tv4.turnOff();
+        System.out.println();
 
         System.out.println(tv1);
         System.out.println(tv2);

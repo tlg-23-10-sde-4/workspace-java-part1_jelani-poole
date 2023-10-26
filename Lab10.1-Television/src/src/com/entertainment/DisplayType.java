@@ -1,4 +1,4 @@
-package com.entertainment;
+package src.com.entertainment;
 
 /*
  * There are 5 instances of DisplayType listed below. NOT strings.
