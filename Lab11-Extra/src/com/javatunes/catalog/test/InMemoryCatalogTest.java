@@ -35,7 +35,7 @@ class InMemoryCatalogTest {
         // testNumberInGenre();
         // testGetAveragePrice();
         // testFindCheapest(); // TODO
-         testHasGenre();
+        // testHasGenre();
 
         // TASK method tests
 
@@ -112,6 +112,10 @@ class InMemoryCatalogTest {
     }
 
     private static void testGetAll() {
+        InMemoryCatalog catalog = new InMemoryCatalog();
+
+        Collection<MusicItem> allItems = catalog.getAll();
+        allItems.clear(); // should throw exception
     }
 
     // helper method to show the collection "vertically"
