@@ -16,7 +16,7 @@ import java.util.List;
 // Your first job is to fulfill the contract that this class has signed.
 public class InMemoryCatalog implements Catalog {
 
-    private List<MusicItem> catalogData = new ArrayList<>(List.of(
+    private final List<MusicItem> catalogData = new ArrayList<>(List.of(
                    /* id    title                        artist                       releaseDate  price  musicCategory */
         new MusicItem(1L,  "Diva",                      "Annie Lennox",              "1992-01-04", 13.99, MusicCategory.POP),
         new MusicItem(2L,  "Dream of the Blue Turtles", "Sting",                     "1985-02-05", 14.99, MusicCategory.POP),
@@ -61,30 +61,127 @@ public class InMemoryCatalog implements Catalog {
      *    It's not just about removing redundancies - it will make the more complicated methods easier to write!
      */
 
+    @Override
+    public MusicItem findById(Long id) {
+        MusicItem item = null;
+
+        for (MusicItem currentItem : catalogData) {
+            if (currentItem.getId().equals(id)) {
+                item = currentItem;
+                break;
+            }
+        }
+        return item;
+    }
+
+    @Override
+    public Collection<MusicItem> findByKeyword(String keyword) {
+        return null;
+    }
+
+    @Override
+    public Collection<MusicItem> findByCategory(MusicCategory category) {
+        Collection<MusicItem> result = new ArrayList<>();
+
+        for (MusicItem item : catalogData) {
+            if (item.getMusicCategory().equals(category)) {
+                result.add(item);
+            }
+        }
+        return result;
+    }
+
+    @Override
+    public int size() {
+        return catalogData.size();
+    }
+
+    @Override
+    public Collection<MusicItem> getAll() {
+        return null;
+    }
+
     /**
      * TASK: find all MusicItems where title is same as artist.
      * For example, Madonna's first album is simply titled, "Madonna."
+     *  selfEntitled()
+     *  selfTitledAlbums()
+     *  findSelfTitled()
      */
+    public Collection<MusicItem> findSelfTitled() {
+        Collection<MusicItem> result = new ArrayList<>();
+
+        for (MusicItem item : catalogData) {
+            if (item.getTitle().equals(item.getArtist())) {
+                result.add(item);
+            }
+        }
+        return result;
+    }
 
 
     /**
      * TASK: find all "rock" items whose price is less than or equal to the specified price.
      */
+    public Collection<MusicItem> findCheapRock(double price) {
+        Collection<MusicItem> result = new ArrayList<>();
+
+        // *JavaScript for loop*
+        for (int i = 0; i < catalogData.size(); i++) {
+            if (catalogData.get(i).getMusicCategory().equals(MusicCategory.ROCK) &&
+            catalogData.get(i).getPrice() <= price) {
+                result.add(catalogData.get(i));
+            }
+        }
+
+        return result;
+    }
 
 
     /**
      * TASK: how many items of the specified genre (MusicCategory) do we sell?
      */
-
+    public int numberInGenre(MusicCategory category) {
+        int totalSold = 0;
+        // DataType   Name   Array to LoopThrough
+        for(MusicItem item : catalogData) {
+            if (item.getMusicCategory().equals(category)) {
+                totalSold += 1;
+            }
+        }
+        return totalSold;
+    }
 
     /**
      * TASK: determine average price of our low-cost, extensive catalog of music.
      */
+    public double getAveragePrice() {
+        double totalPrice = 0.0;
+
+        for (MusicItem item : catalogData) {
+            totalPrice += item.getPrice();
+        }
+
+        return totalPrice / catalogData.size();
+    }
 
 
     /**
      * TASK: find the cheapest item with the specified genre (MusicCategory).
      */
+    public MusicItem findCheapest(MusicCategory genre) {
+        MusicItem cheapItem = null;
+
+        for (MusicItem item : catalogData) {
+            if (item.equals(genre)) {
+                if (cheapItem == null || item.getPrice() < cheapItem.getPrice()) {
+                    cheapItem = item;
+                }
+            }
+        }
+
+        return cheapItem;
+    }
 
 
     /**
@@ -102,6 +199,24 @@ public class InMemoryCatalog implements Catalog {
      * TASK: do we sell any items with the specified genre (MusicCategory)?
      * Another yes/no answer.
      */
+    public boolean hasGenre(MusicCategory category) { // BLUES
+        return findByCategory(category).size() > 0;
+
+        //  *OR this method below*
+
+        /*
+        boolean result = false;
+
+        for (MusicItem item : catalogData) {
+            if (item.getMusicCategory().equals(category)) {
+                result = true;
+                break;
+            }
+        }
+        return result;
+
+         */
+    }
 
 
     /**
