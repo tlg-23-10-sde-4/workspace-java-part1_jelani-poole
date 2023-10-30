@@ -200,11 +200,9 @@ public class InMemoryCatalog implements Catalog {
      * Another yes/no answer.
      */
     public boolean hasGenre(MusicCategory category) { // BLUES
-        return findByCategory(category).size() > 0;
+        // return findByCategory(category).size() > 0;
 
         //  *OR this method below*
-
-        /*
         boolean result = false;
 
         for (MusicItem item : catalogData) {
@@ -214,8 +212,6 @@ public class InMemoryCatalog implements Catalog {
             }
         }
         return result;
-
-         */
     }
 
 
